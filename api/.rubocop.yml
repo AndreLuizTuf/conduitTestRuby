@@ -1,0 +1,13 @@
+AllCops:
+  NewCops: enable
+  Exclude:
+    - bin/*
+    - db/schema.rb
+    - db/migrate/*.rb
+Layout/LineLength:
+  Max: 120
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*.rb
+Style/Documentation:
+  Enabled: false

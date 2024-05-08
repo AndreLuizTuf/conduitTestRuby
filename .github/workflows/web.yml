@@ -1,0 +1,37 @@
+name: Web
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          cache-dependency-path: web/package-lock.json
+          cache: "npm"
+          node-version: "18.x"
+      - run: npm install
+        working-directory: ./web
+      - run: npm run lint
+        working-directory: ./web
+      - run: npm run build
+        working-directory: ./web
+      - run: npx playwright install --with-deps
+        working-directory: ./web
+      - run: npm run build-storybook -- --quiet
+        working-directory: ./web
+      - run: |
+          npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
+            "npx http-server storybook-static --port 6006 --silent" \
+            "npx wait-on http://127.0.0.1:6006 && npm run test-storybook"
+        working-directory: ./web
+      - name: Publish Storybook and run visual tests
+        if: github.actor != 'dependabot[bot]' && github.actor != 'dependabot-preview[bot]'
+        run: npm run chromatic -- --exit-once-uploaded
+        env:
+          CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+        working-directory: ./web

@@ -1,0 +1,31 @@
+# frozen_string_literal: true
+
+gem 'action_policy'
+gem 'action_policy-graphql'
+gem 'active_record_doctor', group: :development
+gem 'bootsnap', require: false
+gem 'byebug', platforms: %i[mri mingw x64_mingw], group: %i[development test]
+gem 'database_cleaner-active_record', group: :test
+gem 'devise'
+gem 'factory_bot_rails', group: :test
+gem 'faker'
+gem 'friendly_id'
+gem 'graphql'
+gem 'jwt'
+gem 'listen', group: :development
+gem 'net-smtp', require: false
+gem 'pg'
+gem 'puma'
+gem 'rack-cors'
+gem 'rails'
+gem 'rails-erd', group: :development
+gem 'rspec-rails', group: :development
+gem 'rubocop', group: :development, require: false
+gem 'shoulda-matchers', group: :test
+gem 'solargraph', group: :development
+gem 'spring', group: :development
+gem 'spring-watcher-listen', group: :development
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+ruby '3.2.2'
+source 'https://rubygems.org'

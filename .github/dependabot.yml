@@ -1,0 +1,21 @@
+version: 2
+updates:
+  - package-ecosystem: bundler
+    directory: "/api"
+    schedule:
+      interval: daily
+    open-pull-requests-limit: 10
+    reviewers:
+      - lifeiscontent
+  - package-ecosystem: npm
+    directory: "/web"
+    schedule:
+      interval: daily
+    groups:
+      storybook:
+        applies-to: version-updates
+        patterns:
+        - "@storybook*"
+    open-pull-requests-limit: 10
+    reviewers:
+      - lifeiscontent
